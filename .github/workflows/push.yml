@@ -24,7 +24,7 @@ jobs:
             node-version: 10.x
             status: 'deprecated'
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v4
       - name: 'Install apt packages'
         shell: bash
         run: |
@@ -45,16 +45,16 @@ jobs:
           ./configure --datadir=/data --prefix=/deps --bindir=/deps || cat config.log
           make -j4
           make install
+          ldconfig
       - name: 'Install node.js ${{ matrix.node-version }}'
-        uses: actions/setup-node@v2-beta
+        uses: actions/setup-node@v4
         with:
           node-version: '${{ matrix.node-version }}'
       - name: 'Install node-postal'
         env:
           CXXFLAGS: '-I/deps/include'
           LDFLAGS: '-L/deps/lib'
-        run: |
-          npm install -g node-gyp
+        run:
           npm install
       - name: 'Run unit tests'
         env:
