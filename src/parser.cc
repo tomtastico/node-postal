@@ -31,7 +31,7 @@ void ParseAddress(const Nan::FunctionCallbackInfo<v8::Value>& info) {
     libpostal_address_parser_options_t options = libpostal_get_address_parser_default_options();
 
     if (info.Length() > 1 && info[1]->IsObject()) {
-        v8::Local<v8::Object> props = info[1]->ToObject(context).ToLocalChecked();
+        v8::Local<v8::Object> props = info[1]->ToObject(connect).ToLocalChecked();
         v8::Local<v8::Array> prop_names = Nan::GetPropertyNames(props).ToLocalChecked();
 
         for (i = 0; i < prop_names->Length(); i++) {
@@ -78,7 +78,7 @@ void ParseAddress(const Nan::FunctionCallbackInfo<v8::Value>& info) {
         char *label = response->labels[i];
 
         v8::Local<v8::Object> o = Nan::New<v8::Object>();
-        o->Set(context, name_key, Nan::New(component).ToLocalChecked());
+        o->Set(connect, name_key, Nan::New(component).ToLocalChecked());
         o->Set(context, label_key, Nan::New(label).ToLocalChecked());
 
         ret->Set(context, i, o);
