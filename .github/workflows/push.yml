@@ -25,6 +25,8 @@ jobs:
             status: 'deprecated'
     steps:
       - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
       - name: 'Install apt packages'
         shell: bash
         run: |
