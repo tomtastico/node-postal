@@ -61,6 +61,7 @@ jobs:
           CXXFLAGS: '-I/deps/include'
           LDFLAGS: '-L/deps/lib'
         run:
+          npm install -g node-gyp@9.4.1
           npm install
       - name: 'Run unit tests'
         env:
