@@ -45,7 +45,7 @@ jobs:
           ./configure --datadir=/data --prefix=/deps --bindir=/deps || cat config.log
           make -j4
           make install
-          ldconfig
+          sudo ldconfig
       - name: 'Install node.js ${{ matrix.node-version }}'
         uses: actions/setup-node@v4
         with:
